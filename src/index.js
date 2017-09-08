@@ -35,10 +35,14 @@ class Calendar extends React.Component {
     }
 
     handleDay(obj){
-        const {month} = this.state;
+        const {month, year} = this.state;
+        const tempMonth = month + obj.offset;
+        const newMonth = tempMonth > 11 ? 0 : tempMonth < 0 ? 11 : tempMonth;
+        const newYear = tempMonth > 11 ? year + 1 : tempMonth < 0 ? year - 1 : year;
         this.setState({
             date: parseInt(obj.d, 10),
-            month: month + obj.offset
+            month: newMonth,
+            year: newYear
         })
     }
 
