@@ -7,10 +7,16 @@ import Day from './Day';
 
 const Month = (props) => {
     const {months, days, dates} = props.data;
-    const {month, date, day, maxDate} = props.calendarDate;
-    const gapDays = [];
+    const {month, date, day, maxDate, prevMaxDate} = props.calendarDate;
+    const prevDays = [];
     for(let i = 0; i < day; i++){
-        gapDays.push(<Day key={i} date={0}/>);
+        prevDays.push(<Day key={i} date={(prevMaxDate - (day-1)) + i} offset={-1}/>);
+    }
+    const nextDays = [];
+    const lastDays = 7 - ((maxDate + day) % 7);
+    console.log(lastDays);
+    for(let i = 0; i < lastDays; i++){
+
     }
 
     function handleDay(d){
@@ -31,12 +37,12 @@ const Month = (props) => {
                             </div>
                 })}
             </div>
-                {gapDays.map(g => {
+                {prevDays.map(g => {
                     return g
                 })}
                 {dates.filter(d => d <= maxDate).map((d, k) => {
                     return (
-                        <Day key={k} date={d} highlight={d === date} handleDay={() => handleDay(d)}/>
+                        <Day key={k} date={d} highlight={d === date} offset={0} handleDay={() => handleDay(d)}/>
                     )
                 })}
         </div>
