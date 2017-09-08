@@ -38,9 +38,11 @@ class Calendar extends React.Component {
         })
     }
 
-    handleDay(d){
+    handleDay(obj){
+        const {month} = this.state;
         this.setState({
-            date: parseInt(d, 10)
+            date: parseInt(obj.d, 10),
+            month: month + obj.offset
         })
     }
 
