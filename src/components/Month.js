@@ -6,15 +6,15 @@ import React from 'react';
 import Day from './Day';
 
 const Month = (props) => {
-    const {months, days, dates, years} = props.data;
-    const {month, date, year, day, maxDate} = props.calendarDate;
+    const {months, days, dates} = props.data;
+    const {month, date, day, maxDate} = props.calendarDate;
     const gapDays = [];
     for(let i = 0; i < day; i++){
         gapDays.push(<Day key={i} date={0}/>);
     }
 
     function handleDay(d){
-        console.log('day', d)
+        //console.log('day', d)
         props.handleDay(d);
     }
 

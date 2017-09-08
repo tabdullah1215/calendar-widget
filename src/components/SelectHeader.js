@@ -29,7 +29,7 @@ const SelectHeader = (props) => {
             })
             }
         </select>
-        <select defaultValue={date} onChange={handleDate}>
+        <select value={date} onChange={handleDate}>
             {
                 dates.map((d, k) => {
                     return <option key={k} value={d}>{d}</option>

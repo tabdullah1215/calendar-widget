@@ -9,56 +9,48 @@ class Calendar extends React.Component {
     constructor(){
         super();
         const currentDate = new Date();
-        console.log('getdate: ', currentDate.getDate());
+        console.log('current date constructor: ', currentDate);
         this.state = {
             month: currentDate.getMonth(),
             date: currentDate.getDate(),
-            year: currentDate.getFullYear()
+            year: currentDate.getFullYear(),
+            day: currentDate.getDay(),
+            maxDate: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate()
         };
     }
 
     handleMonth(m){
-        console.log('handle month', m);
+        const {year} = this.state;
         this.setState({
-            month: parseInt(m)
+            month: parseInt(m, 10),
+            day: new Date(year, m, 1).getDay(),
+            maxDate: new Date(year, parseInt(m, 10)+1, 0).getDate()
         });
     }
 
     handleDate(d){
-        console.log('handle date', d);
         this.setState({
-            date: parseInt(d)
+            date: parseInt(d, 10)
         })
     }
 
     handleYear(y){
-        console.log('handle year', y);
+        const {month} = this.state;
         this.setState({
-            year: parseInt(y)
+            year: parseInt(y, 10),
+            day: new Date(y, month, 1).getDay(),
+            maxDate: new Date(y, parseInt(month, 10)+1, 0).getDate()
         })
     }
 
     handleDay(d){
         this.setState({
-            date: parseInt(d)
+            date: parseInt(d, 10)
         })
     }
 
-    getCalendarDate(){
-        const {month, date, year} = this.state;
-        const selectedDate = new Date(year, month, date);
-        console.log('getday', selectedDate.getDay());
-        return {
-            month: parseInt(month),
-            date: date,
-            year: year,
-            day: selectedDate.getDay(),
-            maxDate: new Date(year, parseInt(month) + 1, 0).getDate()
-        }
-    }
     render() {
-        console.log('render date', this.getCalendarDate());
-        const calendarDate = this.getCalendarDate();
+        const calendarDate = this.state;
         return (
 
             <div>
