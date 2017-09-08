@@ -21,14 +21,13 @@ const Month = (props) => {
     }
 
     function handleDay(obj){
-        console.log('obj', obj);
         props.handleDay(obj);
     }
 
 
     return (
         <div style={{width: '50%', display: 'inline'}}>
-            <h1>{months[month]}</h1>
+            <h1 style={{textAlign: 'center'}}>{months[month]}</h1>
             <div>
 
                 {days.map((d, k) => {

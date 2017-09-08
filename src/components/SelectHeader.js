@@ -7,7 +7,6 @@ import React from 'react';
 const SelectHeader = (props) => {
     const {months, dates, years} = props.data;
     const {month, date, year} = props.calendarDate;
-    console.log('selectheader', month, date, year);
 
     function handleMonth(e){
         props.handleMonth(e.target.value);
@@ -22,21 +21,21 @@ const SelectHeader = (props) => {
     return (
         <div>
 
-        <select defaultValue={month} onChange={handleMonth}>
+        <select value={month} onChange={handleMonth} style={{fontSize: '24px'}}>
             {
                 months.map((m, k) => {
                     return <option key={k} value={k}>{m}</option>
             })
             }
         </select>
-        <select value={date} onChange={handleDate}>
+        <select value={date} onChange={handleDate} style={{fontSize: '24px'}}>
             {
                 dates.map((d, k) => {
                     return <option key={k} value={d}>{d}</option>
                 })
             }
         </select>
-        <select defaultValue={year} onChange={handleYear}>
+        <select value={year} onChange={handleYear} style={{fontSize: '24px'}}>
             {
                 years.map((y, k) => {
                     return <option key={k} value={y}>{y}</option>

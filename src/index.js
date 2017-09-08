@@ -9,17 +9,14 @@ class Calendar extends React.Component {
     constructor(){
         super();
         const currentDate = new Date();
-        console.log('current date constructor: ', currentDate);
         this.state = {
             month: currentDate.getMonth(),
             date: currentDate.getDate(),
             year: currentDate.getFullYear()
-
         };
     }
 
     handleMonth(m){
-        const {year} = this.state;
         this.setState({
             month: parseInt(m, 10)
         });
@@ -32,7 +29,6 @@ class Calendar extends React.Component {
     }
 
     handleYear(y){
-        const {month} = this.state;
         this.setState({
             year: parseInt(y, 10)
         })
@@ -47,18 +43,17 @@ class Calendar extends React.Component {
     }
 
     getCalendarDate(){
-        const {year, month, date} = this.state;
+        const {year, month} = this.state;
         return {
             ...this.state,
             day: new Date(year, month, 1).getDay(),
             maxDate: new Date(year, month+1, 0).getDate(),
-            prevMaxDate: new Date(year, month, 0).getDate()
+            prevMaxDate: new Date(year, (month+1)-1, 0).getDate()
         }
     }
 
     render() {
         const calendarDate = this.getCalendarDate();
-        console.log(calendarDate);
         return (
 
             <div>

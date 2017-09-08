@@ -9,7 +9,6 @@ const Day = (props) => {
     const ftColor = props.offset === 0 ? 'black' : 'lightGrey';
 
     function handleDay(){
-        console.log('offset', props.offset);
         props.handleDay({d: props.date, offset: props.offset});
     }
 
