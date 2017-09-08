@@ -9,6 +9,7 @@ class Calendar extends React.Component {
     constructor(){
         super();
         const currentDate = new Date();
+        console.log('getdate: ', currentDate.getDate());
         this.state = {
             month: currentDate.getMonth(),
             date: currentDate.getDate(),
@@ -19,47 +20,51 @@ class Calendar extends React.Component {
     handleMonth(m){
         console.log('handle month', m);
         this.setState({
-            month: m
+            month: parseInt(m)
         });
     }
 
     handleDate(d){
         console.log('handle date', d);
         this.setState({
-            date: d
+            date: parseInt(d)
         })
     }
 
     handleYear(y){
         console.log('handle year', y);
         this.setState({
-            year: y
+            year: parseInt(y)
+        })
+    }
+
+    handleDay(d){
+        this.setState({
+            date: parseInt(d)
         })
     }
 
     getCalendarDate(){
         const {month, date, year} = this.state;
-        const selectedDate = new Date();
-        selectedDate.setMonth(this.state.month);
-        selectedDate.setDate(this.state.date);
-        selectedDate.setFullYear(this.state.year);
+        const selectedDate = new Date(year, month, date);
+        console.log('getday', selectedDate.getDay());
         return {
-            month: month,
+            month: parseInt(month),
             date: date,
-            year: year
+            year: year,
+            day: selectedDate.getDay(),
+            maxDate: new Date(year, parseInt(month) + 1, 0).getDate()
         }
     }
     render() {
-        console.log(data);
-        console.log(this.state);
-        console.log(this.getCalendarDate());
+        console.log('render date', this.getCalendarDate());
         const calendarDate = this.getCalendarDate();
         return (
 
             <div>
                 <SelectHeader calendarDate={calendarDate} data={data}
                               handleMonth={(m) => this.handleMonth(m)} handleDate={(d) => this.handleDate(d)} handleYear={(y) => this.handleYear(y)}/>
-                <Month calendarDate={calendarDate} data={data}/>
+                <Month calendarDate={calendarDate} data={data} handleDay={(d) => this.handleDay(d)}/>
             </div>
         )
     }
